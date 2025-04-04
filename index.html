@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokémon Finder</title>
+<link rel="stylesheet" href="css.styles.css">
+</head>
+<body>
+<h1>Encontre um Pokémon!</h1>
+<input type="text" id="pokemon-name" placeholder="Digite um Pokémon (ex: pikachu)">
+<button onclick="buscarPokemon()">Buscar</button>
+
+<div id="pokemon-container">
+<h2 id="nome"></h2>
+<img id="imagem" src="" alt="">
+<p id="info"></p>
+</div>
+
+// <script>
+//function buscarPokemon() {
+//const nome = document.getElementById("pokemon-name").value.toLowerCase();
+//fetch('https://pokeapi.co/api/v2/pokemon/${nome}`)
+//.then(response => {
+//        if (!response.ok) {
+//            throw new error ("pokemon não encontrado!")
+//        }
