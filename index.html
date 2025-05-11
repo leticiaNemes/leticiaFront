@@ -1,27 +1,44 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pokémon Finder teste</title>
-<link rel="stylesheet" href="css.styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Finder</title>
+  <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-<h1>Encontre um Pokémon!</h1>
-<input type="text" id="pokemon-name" placeholder="Digite um Pokémon (ex: pikachu)">
-<button onclick="buscarPokemon()">Buscar</button>
+  <h1>Encontre um Pokémon! 🔍</h1>
+  <input type="text" id="pokemon-name" placeholder="Digite um Pokémon (ex: pikachu)">
+  <button onclick="buscarPokemon()">Buscar</button>
+  
+  <div id="pokemon-container">
+    <h2 id="nome"></h2>
+    <img id="imagem" src="" alt="">
+    <p id="info"></p>
+  </div>
 
-<div id="pokemon-container">
-<h2 id="nome"></h2>
-<img id="imagem" src="" alt="">
-<p id="info"></p>
-</div>
-
-// <script>
-//function buscarPokemon() {
-//const nome = document.getElementById("pokemon-name").value.toLowerCase();
-//fetch('https://pokeapi.co/api/v2/pokemon/${nome}`)
-//.then(response => {
-//        if (!response.ok) {
-//            throw new error ("pokemon não encontrado!")
-//        }
+  <script>
+    function buscarPokemon() {
+      const nome = document.getElementById("pokemon-name").value.toLowerCase();
+      fetch(`https://pokeapi.co/api/v2/pokemon/${nome}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Pokémon não encontrado!");
+          }
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById("nome").innerText = data.name.toUpperCase();
+          document.getElementById("imagem").src = data.sprites.front_default;
+          document.getElementById("info").innerText = `Tipo: ${data.types.map(t => t.type.name).join(", ")}`;
+        })
+        .catch(error => {
+          document.getElementById("nome").innerText = "Erro!";
+          document.getElementById("imagem").src = "";
+          document.getElementById("info").innerText = "Pokémon não encontrado. Tente outro nome.";
+        });
+    }
+  </script>
+</body>
+</html>
